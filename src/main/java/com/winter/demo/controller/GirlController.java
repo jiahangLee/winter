@@ -1,6 +1,8 @@
 package com.winter.demo.controller;
 
 import com.winter.demo.entity.Girl;
+import com.winter.demo.entity.Result;
+import com.winter.demo.util.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -24,12 +26,12 @@ public class GirlController {
     }
 
     @PostMapping(value = "girls")
-    public Girl girlAdd(@Valid  Girl girl, BindingResult bindingResult) {
+    public Result<Girl> girlAdd(@Valid  Girl girl, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
-            return null;
+            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
-        return girlRepository.save(girl);
+
+        return ResultUtil.success(girlRepository.save(girl));
     }
 
     @GetMapping(value = "girls/{id}")

@@ -1,6 +1,7 @@
 package com.winter.demo.controller;
 
 import com.winter.demo.entity.Girl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
+@Slf4j
 public class GirlController {
 
     @Autowired
@@ -53,6 +55,7 @@ public class GirlController {
 
     @GetMapping(value = "girls/age/{age}")
     public List<Girl> girlByAge(@PathVariable(value = "age") Integer age) {
+        log.info("我是好人inner");
         return girlRepository.findByAge(age);
     }
 }

@@ -2,8 +2,10 @@ package com.winter.demo.controller;
 
 import com.winter.demo.entity.Girl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +22,11 @@ public class GirlController {
     }
 
     @PostMapping(value = "girls")
-    public Girl girlAdd(Girl girl) {
+    public Girl girlAdd(@Valid  Girl girl, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            return null;
+        }
         return girlRepository.save(girl);
     }
 

@@ -4,6 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.sql.Timestamp;
 
 @Entity
@@ -13,6 +14,7 @@ public class Girl {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @Min(value = 18, message = "未成年")
     private Integer age;
     @CreationTimestamp
     @Column(name = "create_time",columnDefinition="DATETIME COMMENT '添加时间'")

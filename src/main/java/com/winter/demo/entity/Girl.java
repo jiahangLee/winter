@@ -2,9 +2,11 @@ package com.winter.demo.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Entity
@@ -13,6 +15,8 @@ public class Girl {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
+//    @Length
+    @NotNull(message = "金额必传")
     private String name;
     @Min(value = 18, message = "未成年")
     private Integer age;

@@ -2,6 +2,7 @@ package com.winter.demo.controller;
 
 import com.winter.demo.entity.Girl;
 import com.winter.demo.entity.Result;
+import com.winter.demo.service.GirlService;
 import com.winter.demo.util.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class GirlController {
     @Autowired
     private GirlRepository girlRepository;
 
+    @Autowired
+    private GirlService girlService;
+
     @GetMapping(value = "/girls")
     public List<Girl> girlList() {
         return girlRepository.findAll();
@@ -28,7 +32,8 @@ public class GirlController {
     @PostMapping(value = "girls")
     public Result<Girl> girlAdd(@Valid  Girl girl, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
+            return null;
+//            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
 
         return ResultUtil.success(girlRepository.save(girl));
@@ -59,5 +64,10 @@ public class GirlController {
     public List<Girl> girlByAge(@PathVariable(value = "age") Integer age) {
         log.info("我是好人inner");
         return girlRepository.findByAge(age);
+    }
+
+    @GetMapping(value = "girls/getAge/{id}")
+    public void getAge(@PathVariable(value = "id") Integer id) throws Exception {
+        girlService.getAge(id);
     }
 }

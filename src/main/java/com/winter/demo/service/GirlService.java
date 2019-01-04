@@ -2,6 +2,8 @@ package com.winter.demo.service;
 
 import com.winter.demo.controller.GirlRepository;
 import com.winter.demo.entity.Girl;
+import com.winter.demo.entity.Result;
+import com.winter.demo.enums.ResultEnum;
 import com.winter.demo.util.GirlException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +21,9 @@ public class GirlService {
         Optional<Girl> girl = girlRepository.findById(id);
         Integer age = girl.get().getAge();
         if (age < 10) {
-            throw new GirlException(100,"你还在上小学");
+            throw new GirlException(ResultEnum.PRIMARY_SCHOOL);
         }else if (age > 10 && age < 16) {
-            throw new GirlException(101,"你还在上初中");
+            throw new GirlException(ResultEnum.MIDDLE_SCHOOL);
         }
     }
 }

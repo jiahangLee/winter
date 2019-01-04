@@ -1,12 +1,14 @@
 package com.winter.demo.util;
 
+import com.winter.demo.enums.ResultEnum;
+
 public class GirlException extends RuntimeException {
 
     private Integer code;
 
-    public GirlException(Integer code, String message) {
-        super(message);
-        this.code = code;
+    public GirlException(ResultEnum resultEnum) {
+        super(resultEnum.getMsg());
+        this.code = resultEnum.getCode();
     }
 
     public Integer getCode() {

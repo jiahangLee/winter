@@ -68,6 +68,8 @@ public class GirlController {
 
     @GetMapping(value = "girls/getAge/{id}")
     public void getAge(@PathVariable(value = "id") Integer id) throws Exception {
+        log.info("访问接口前");
         girlService.getAge(id);
+        log.info("访问接口后");
     }
 }
